@@ -11,22 +11,39 @@ Guidance for Claude Code in this repository.
 ## Structure
 
 ```text
-README.md          overview and setup
-docs/agenda.html   session agenda with timeline (print to PDF)
-docs/agenda.pdf    exported agenda
-company/           fictional example company used in all demos (planned)
-demos/             daily briefing, e-mail triage, chief of staff, advisory board (planned)
-handout/           one-page handout (planned)
-scripts/hooks/     pre-commit secret scan
+README.md                          overview, how to run the demos in Claude Code and claude.ai
+docs/agenda.html                   session agenda with timeline (print to PDF)
+docs/agenda.pdf                    exported agenda
+docs/facilitator-guide.md          run sheet: minutes, prompts, expected results, fallbacks, guardrails
+company/COMPANY.md                 fictional example company, single source of truth for all demo facts
+demos/01-ceos-morning/             demo 1: inbox/ (14 e-mails), calendar/, CLAUDE.md, out/,
+                                   .claude/skills/email-triage and daily-briefing,
+                                   claude-ai-version.md, claude-ai-pack.md (generated)
+demos/02-chief-of-staff/           demo 2: notes/ (3 meetings), TRUST-LEVELS.md, CLAUDE.md, out/,
+                                   .claude/skills/chief-of-staff, .claude/settings.json,
+                                   .claude/hooks/trust-guard.sh and hooks/tests/ (runner + fixtures),
+                                   claude-ai-version.md, claude-ai-pack.md (generated)
+demos/03-advisory-board/prompt.md  demo 3: advisory board and personal coach prompts for claude.ai
+demos/fallback/                    prepared outputs of demos 1 and 2
+scripts/build-claude-ai-pack.sh    builds the claude-ai-pack.md files from the demo data
+scripts/hooks/                     pre-commit secret scan
 ```
 
 ## Content rules
 
 - English for everything participants see.
 - No em-dash characters (U+2014). Use commas, colons or parentheses instead.
-- No secrets, no client data, no real names of participants or customers.
-- All demo data belongs to the fictional company in `company/`. No real inboxes, calendars, clients or employees.
-- Every live demo has a fallback (prepared output or screenshots) in case the network or a login fails.
+- No secrets, no client data, no real names of participants or customers. No full e-mail addresses in demo content; use names, roles and `.example` domains.
+- All demo data belongs to the fictional company in `company/`. No real inboxes, calendars, clients or employees. Every fact in `demos/` must match `company/COMPANY.md`.
+- Every live demo has a fallback (prepared output or screenshots) in case the network or a login fails. Keep `demos/fallback/` in line with the skills.
+- Plain language for a non-technical audience: explain any technical term in one line.
+
+## Checks before a pull request
+
+- `bash demos/02-chief-of-staff/.claude/hooks/tests/run-tests.sh` passes.
+- `bash -n` and `shellcheck -S warning` are clean on all shell scripts.
+- After changing demo data or `TRUST-LEVELS.md`: `bash scripts/build-claude-ai-pack.sh`.
+- Generated results in `demos/*/out/` are not committed (see `.gitignore`).
 
 ## Git workflow
 

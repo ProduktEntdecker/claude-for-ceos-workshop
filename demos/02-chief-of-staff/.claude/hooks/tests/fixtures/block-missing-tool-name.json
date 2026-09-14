@@ -1,0 +1,6 @@
+{
+  "session_id": "fixture",
+  "hook_event_name": "PreToolUse",
+  "cwd": "__ROOT__",
+  "tool_input": { "file_path": "__ROOT__/out/tasks.md", "content": "# Task list" }
+}

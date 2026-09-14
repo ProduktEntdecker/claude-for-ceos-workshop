@@ -1,0 +1,7 @@
+{
+  "session_id": "fixture",
+  "hook_event_name": "PreToolUse",
+  "cwd": "__ROOT__",
+  "tool_name": "Edit",
+  "tool_input": { "file_path": "out/weekly-status-2026-w39.md", "old_string": "open", "new_string": "due this week" }
+}

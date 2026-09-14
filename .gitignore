@@ -18,4 +18,8 @@ dist/
 # Claude Code worktrees
 .claude/worktrees/
 
+# Results written by demo runs and rehearsals
+demos/*/out/*
+!demos/*/out/.gitkeep
+
 *.log
