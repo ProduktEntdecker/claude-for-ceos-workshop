@@ -42,8 +42,8 @@ SECRET_PATTERNS=(
     # OpenAI API keys
     'sk-[A-Za-z0-9]{20,}'
     # Generic API key patterns
-    'api[_-]?key["\[:space:]:=]+[A-Za-z0-9_-]{20,}'
-    'api[_-]?secret["\[:space:]:=]+[A-Za-z0-9_-]{20,}'
+    'api[_-]?key["[:space:]:=]+[A-Za-z0-9_-]{20,}'
+    'api[_-]?secret["[:space:]:=]+[A-Za-z0-9_-]{20,}'
     # AWS
     'AKIA[0-9A-Z]{16}'
     'aws[_-]?secret[_-]?access[_-]?key'
@@ -55,8 +55,8 @@ SECRET_PATTERNS=(
     # GitLab tokens
     'glpat-[A-Za-z0-9_-]{20,}'
     # Generic secrets
-    'password["\[:space:]:=]+[^\[:space:]]{8,}'
-    'secret["\[:space:]:=]+[^\[:space:]]{16,}'
+    'password["[:space:]:=]+[^[:space:]]{8,}'
+    'secret["[:space:]:=]+[^[:space:]]{16,}'
 )
 
 for pattern in "${SECRET_PATTERNS[@]}"; do
