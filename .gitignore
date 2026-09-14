@@ -1,0 +1,21 @@
+# OS and editors
+.DS_Store
+.idea/
+.vscode/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies and build output
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+dist/
+
+# Claude Code worktrees
+.claude/worktrees/
+
+*.log
