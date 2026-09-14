@@ -9,13 +9,14 @@ The idea: Claude as a thinking partner for leaders, not only an assistant.
 ## Contents
 
 - [`docs/agenda.html`](docs/agenda.html): agenda with timeline. Open it in a browser and print to PDF, or use [`docs/agenda.pdf`](docs/agenda.pdf).
+- [`slides/`](slides/): workshop deck (HTML and PDF) with speaker notes.
+- [`handout/`](handout/): one-page handout with the three prompts, guardrails and next steps (HTML and PDF).
 - [`docs/facilitator-guide.md`](docs/facilitator-guide.md): run sheet with exact prompts, fallbacks and the guardrails for company data.
 - [`company/COMPANY.md`](company/COMPANY.md): the fictional example company used in all demos.
 - [`demos/01-ceos-morning/`](demos/01-ceos-morning/): daily briefing and e-mail triage.
 - [`demos/02-chief-of-staff/`](demos/02-chief-of-staff/): chief of staff with trust levels.
 - [`demos/03-advisory-board/prompt.md`](demos/03-advisory-board/prompt.md): your advisory board, plus a personal coach variant.
 - [`demos/fallback/`](demos/fallback/): prepared results of demos 1 and 2, in case the network or a login fails.
-- `handout/`: one-page handout with next steps and guardrails (planned).
 
 ## What is in each demo
 
