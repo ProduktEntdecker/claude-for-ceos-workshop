@@ -1,51 +1,98 @@
 #!/bin/bash
 # Pre-commit hook: blocks secrets and PII from being committed.
 #
-# Based on the init-repo skill template, hardened for this repository:
-# - scans only lines that the staged diff adds, so removing a secret never blocks
-# - reports file and pattern category, never the matching content
-# - passes patterns with -e (one starts with dashes) and uses POSIX classes,
-#   because BSD grep on macOS reads \s literally inside bracket expressions
-# - finds e-mail addresses with grep -o and filters an allowlist afterwards,
-#   because grep -E has no lookahead
+# Created by the init-repo skill.
 #
 # Install: cp scripts/hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
-# Tests:   bash scripts/hooks/test-pre-commit.sh
+# Or run: bash scripts/install-hooks.sh
+# Regression test: hooks/tests/test-init-repo-pre-commit.sh in flos-claude-skills.
+#
+# How it scans (hardened first in the workshop repos, back here with #280):
+# - Only the lines a staged file ADDS, without the diff prefix. Scanning the raw
+#   diff punishes cleanup, because the removed line matches the same pattern as
+#   the added one did, and it invents matches: an import line that consists of an
+#   at sign and a file name reaches the scan with the diff plus in front of it,
+#   and that plus serves an email pattern as the missing local part.
+# - A finding names the file and the category, never the matching content, so a
+#   secret does not travel on into the terminal and into every log that keeps it.
+# - File names are read NUL-separated. core.quotepath=off alone is not enough:
+#   git keeps C-quoting backslash, quote, tab and newline, and a quoted name
+#   points at no existing file, so that file would be skipped without a word.
+#
+# Pattern rules (POSIX ERE, must behave the same with BSD grep on macOS and GNU grep):
+# - No \s or \d. Inside [...] they are literal characters, outside support differs
+#   between grep implementations. Use [:space:] and 0-9 inside brackets,
+#   [[:space:]] and [0-9] outside.
+# - No lookahead like (?!...). ERE does not know it and grep exits with 2.
+# - Patterns are passed with -e, so a leading "-" is not read as an option.
+# - \b is the one non-POSIX escape in use. It is supported by BSD grep on macOS
+#   and by GNU grep, and hooks/enforce-no-pii.sh relies on it for the same IBAN
+#   pattern. A bracket class instead would consume the neighbouring character
+#   and change what the match returns, so keep it.
+# - A grep error (exit above 1) blocks the commit instead of counting as "no match".
 
 set -u
 
+# Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-# "category|regex", matched case-insensitively against added lines
+# Entries are "category|regex". Two regexes contain a "|" themselves (the private
+# key alternation below and the .env rule further down), so split only at the
+# FIRST separator: "${entry%%|*}" for the category, "${entry#*|}" for the regex.
+# A split with cut -d'|' -f2 or IFS='|' read would cut those patterns in half and
+# still match sometimes, which is the kind of damage nobody notices.
+#
+# Matched case-insensitively against added lines.
 SECRET_PATTERNS=(
-    'Anthropic API key|sk-ant-api[0-9]{2}-[A-Za-z0-9_-]{20,}'
+    # Anthropic keys in every variant: api, oat (OAuth), admin, sid.
+    # A fixed "api" would let OAuth tokens and admin keys through.
+    'Anthropic API key|sk-ant-[a-z]+[0-9]{2}-[A-Za-z0-9_-]{20,}'
+    # OpenAI API keys
     'OpenAI API key|sk-[A-Za-z0-9]{20,}'
+    # OpenAI project keys. The line above ends at the first hyphen, so the
+    # 20 character minimum is never reached and they need their own pattern.
+    'OpenAI project key|sk-proj-[A-Za-z0-9_-]{20,}'
+    # Generic API key patterns
     'generic API key|api[_-]?key["[:space:]:=]+[A-Za-z0-9_-]{20,}'
     'generic API secret|api[_-]?secret["[:space:]:=]+[A-Za-z0-9_-]{20,}'
+    # AWS
     'AWS access key id|AKIA[0-9A-Z]{16}'
     'AWS secret access key|aws[_-]?secret[_-]?access[_-]?key'
+    # Private keys
     'private key|-----BEGIN (RSA |EC |DSA |OPENSSH )?PRIVATE KEY-----'
+    # GitHub tokens
     'GitHub token|gh[po]_[A-Za-z0-9]{36}'
+    # GitLab tokens
     'GitLab token|glpat-[A-Za-z0-9_-]{20,}'
-    'passwords in plain text|password["[:space:]:=]+[^[:space:]]{8,}'
-    'secrets in plain text|secret["[:space:]:=]+[^[:space:]]{16,}'
+    # Generic secrets
+    'password in plain text|password["[:space:]:=]+[^[:space:]]{8,}'
+    'secret in plain text|secret["[:space:]:=]+[^[:space:]]{16,}'
 )
 
-# "category|regex", matched case-sensitively against added lines
+# Same "category|regex" form, matched case-sensitively against added lines.
 PII_PATTERNS=(
-    'German IBAN|DE[0-9]{20}'
+    # German IBAN, grouped or not. Taken from hooks/enforce-no-pii.sh: the
+    # optional spaces cover "DE11 1111 ..." as well, which makes a separate
+    # DE[0-9]{20} redundant.
+    'German IBAN|\bDE[0-9]{2}[[:space:]]?([0-9]{4}[[:space:]]?){4}[0-9]{2}\b'
+    # German phone numbers
     'German phone number|\+49[0-9 ()-]{6,}'
 )
 
+# Email addresses are handled on their own: ERE has no lookahead, so the matches
+# are extracted first and the allowed ones are filtered out afterwards.
 EMAIL_REGEX='[A-Za-z0-9._%+-]+@([A-Za-z0-9-]+\.)+[A-Za-z]{2,}'
 # Reserved example domains (RFC 2606) and test addresses may be committed.
 EMAIL_ALLOW='@(([A-Za-z0-9-]+\.)*example(\.(com|org|net))?|test\.com)$'
 
 SENSITIVE_FILES=(
-    '\.env$'
+    # .env itself and every suffixed variant (.env.local, .env.production).
+    # The template check further down keeps .env.example and friends allowed.
+    # Plain regexes, no category: this one carries a "|" of its own.
+    '\.env($|\.)'
     '\.pem$'
     '\.key$'
     'credentials'
@@ -53,18 +100,66 @@ SENSITIVE_FILES=(
     'id_ed25519'
 )
 
-# Lines added to one staged file, without the leading "+" and without file headers.
+# Lines added by one staged file, without the leading "+".
+# The header is skipped by POSITION, everything before the first hunk, not by its
+# pattern: a content line that itself starts with two plus signs arrives with the
+# diff plus in front of it and is then indistinguishable from the "+++ " header
+# line. A pattern filter dropped exactly that line, so a secret on it was never
+# scanned. That is a silent pass, not a false alarm.
 added_lines() {
-    git -c core.quotepath=off diff --cached -U0 --diff-filter=d -- "$1" \
-        | grep -E '^\+' | grep -vE '^\+\+\+ ' | cut -c2-
+    git diff --cached -U0 --diff-filter=d -- "$1" \
+        | sed -n '/^@@/,$p' | grep -E '^\+' | cut -c2-
+}
+
+# matches <text> <grep-flags> <regex>
+# Returns 0 on a match, 1 without it. A grep error (exit above 1, for example an
+# invalid pattern) blocks the commit: treating it as "no match" once disabled the
+# private key and the email check for months without any visible sign.
+matches() {
+    local rc=0
+    printf '%s\n' "$1" | grep "$2" -e "$3" > /dev/null || rc=$?
+    if [ "$rc" -gt 1 ]; then
+        echo -e "${RED}BLOCKED: grep failed (exit $rc), check did not run: $3${NC}"
+        FAILED=1
+    fi
+    [ "$rc" -eq 0 ]
+}
+
+# has_foreign_email <text>
+# Returns 0 when an address outside the allowlist was added.
+has_foreign_email() {
+    local found rest rc=0
+    found=$(printf '%s\n' "$1" | grep -oE -e "$EMAIL_REGEX") || rc=$?
+    if [ "$rc" -gt 1 ]; then
+        echo -e "${RED}BLOCKED: grep failed (exit $rc), email check did not run${NC}"
+        FAILED=1
+        return 1
+    fi
+    [ -n "$found" ] || return 1
+    rc=0
+    rest=$(printf '%s\n' "$found" | grep -viE -e "$EMAIL_ALLOW") || rc=$?
+    # Exit 1 means every address was allowlisted. On a grep error keep them all.
+    if [ "$rc" -gt 1 ]; then
+        rest=$found
+    fi
+    [ -n "$rest" ]
 }
 
 echo ""
 echo -e "${YELLOW}PRE-COMMIT SECURITY CHECK${NC}"
 echo ""
 
-STAGED_FILES=$(git -c core.quotepath=off diff --cached --name-only --diff-filter=d)
-if [ -z "$STAGED_FILES" ]; then
+# Deleted files are skipped: their content is leaving the repository.
+# NUL-separated, because a name with a quote, a backslash, a tab or a newline
+# comes back C-quoted otherwise and then matches no file on disk.
+# Process substitution, not a pipe: a pipe would run the loop in a subshell and
+# the array would be empty afterwards.
+STAGED_FILES=()
+while IFS= read -r -d '' file; do
+    STAGED_FILES+=("$file")
+done < <(git diff --cached --name-only --diff-filter=d -z)
+
+if [ "${#STAGED_FILES[@]}" -eq 0 ]; then
     echo -e "${GREEN}No files staged${NC}"
     exit 0
 fi
@@ -72,50 +167,51 @@ fi
 FAILED=0
 
 echo -e "${YELLOW}[1/2] Scanning added lines for secrets and PII...${NC}"
-while IFS= read -r file; do
-    [ -n "$file" ] || continue
+for file in "${STAGED_FILES[@]}"; do
     content=$(added_lines "$file")
     [ -n "$content" ] || continue
     for entry in "${SECRET_PATTERNS[@]}"; do
-        if printf '%s\n' "$content" | grep -iqE -e "${entry#*|}"; then
+        if matches "$content" -iE "${entry#*|}"; then
             echo -e "${RED}BLOCKED: possible ${entry%%|*} in $file${NC}"
             FAILED=1
         fi
     done
     for entry in "${PII_PATTERNS[@]}"; do
-        if printf '%s\n' "$content" | grep -qE -e "${entry#*|}"; then
+        if matches "$content" -E "${entry#*|}"; then
             echo -e "${RED}BLOCKED: possible ${entry%%|*} in $file${NC}"
             FAILED=1
         fi
     done
-    if printf '%s\n' "$content" | grep -oE -e "$EMAIL_REGEX" | grep -viqE -e "$EMAIL_ALLOW"; then
-        echo -e "${RED}BLOCKED: possible e-mail address in $file${NC}"
+    if has_foreign_email "$content"; then
+        echo -e "${RED}BLOCKED: possible email address in $file${NC}"
         FAILED=1
     fi
-done <<< "$STAGED_FILES"
+done
 
 echo -e "${YELLOW}[2/2] Checking file names...${NC}"
-while IFS= read -r file; do
-    [ -n "$file" ] || continue
+for file in "${STAGED_FILES[@]}"; do
+    # Allow .env.example and similar template files
     case "$file" in
         *.example*|*.template*|*.sample*) continue ;;
     esac
     for pattern in "${SENSITIVE_FILES[@]}"; do
-        if printf '%s\n' "$file" | grep -qE -e "$pattern"; then
+        if matches "$file" -E "$pattern"; then
             echo -e "${RED}BLOCKED: sensitive file name: $file${NC}"
             FAILED=1
         fi
     done
-done <<< "$STAGED_FILES"
+done
 
 echo ""
 if [ "$FAILED" -eq 1 ]; then
     echo -e "${RED}COMMIT BLOCKED: security issues found${NC}"
     echo "The matching content is not printed. Inspect the named files, remove the value, stage again."
+    echo ""
     echo "To bypass (NOT RECOMMENDED): git commit --no-verify"
     echo ""
     exit 1
 fi
+
 echo -e "${GREEN}All security checks passed${NC}"
 echo ""
 exit 0
