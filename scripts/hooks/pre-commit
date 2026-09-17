@@ -52,9 +52,11 @@ SECRET_PATTERNS=(
     'Anthropic API key|sk-ant-[a-z]+[0-9]{2}-[A-Za-z0-9_-]{20,}'
     # OpenAI API keys
     'OpenAI API key|sk-[A-Za-z0-9]{20,}'
-    # OpenAI project keys. The line above ends at the first hyphen, so the
-    # 20 character minimum is never reached and they need their own pattern.
-    'OpenAI project key|sk-proj-[A-Za-z0-9_-]{20,}'
+    # OpenAI keys with a scope prefix: proj, svcacct, admin. The line above
+    # ends at the first hyphen, so the 20 character minimum is never reached
+    # and they need their own pattern. The alternation is safe here because
+    # the entry is split at the FIRST separator only.
+    'OpenAI project or service key|sk-(proj|svcacct|admin)-[A-Za-z0-9_-]{20,}'
     # Generic API key patterns
     'generic API key|api[_-]?key["[:space:]:=]+[A-Za-z0-9_-]{20,}'
     'generic API secret|api[_-]?secret["[:space:]:=]+[A-Za-z0-9_-]{20,}'
@@ -93,6 +95,12 @@ SENSITIVE_FILES=(
     # The template check further down keeps .env.example and friends allowed.
     # Plain regexes, no category: this one carries a "|" of its own.
     '\.env($|\.)'
+    # direnv, blocked on purpose even though an .envrc without values (just
+    # `dotenv .env` or `op run`) is committed legitimately. The hook is the
+    # last line of defence and a false alarm is cheaper than a leaked secret.
+    # .envrc.example stays allowed via the template check, and the skill's
+    # gitignore-template ignores .envrc so it is not staged in the first place.
+    '\.envrc($|\.)'
     '\.pem$'
     '\.key$'
     'credentials'

@@ -7,6 +7,13 @@
 .env
 .env.*
 !.env.example
+!.env.template
+!.env.sample
+.envrc
+.envrc.*
+!.envrc.example
+!.envrc.template
+!.envrc.sample
 
 # Dependencies and build output
 node_modules/
