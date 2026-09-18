@@ -37,7 +37,7 @@ Reading WhatsApp and LinkedIn is the single most persuasive moment in the worksh
 Do this instead:
 - Record it in advance between two accounts you control, or with one contact who has explicitly agreed, using content written for the purpose.
 - Crop to the single conversation. No inbox list, no sidebar, no notification area.
-- If a real name is unavoidable, use a first name only, consistent with the "always anonymise" rule.
+- Replace every name in the staged conversation before recording. A first name still identifies a contact in a LinkedIn or WhatsApp thread, so "first name only" is not anonymisation and would contradict the rule above.
 
 Say on stage: "This is recorded, and both sides of that conversation agreed to it. I am not going to open my actual inbox in front of you, and that is worth saying out loud in a session about giving an AI access to everything."
 

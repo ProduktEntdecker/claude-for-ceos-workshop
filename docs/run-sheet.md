@@ -1,7 +1,7 @@
 # Run sheet: Claude Code for SME Owners and CEOs
 
 Claude Community House Barcelona, Bilbao 128, Room 4.
-Monday 21 September 2026, 13:00 to 15:00. 20 seats, sold out, waiting list managed at the door.
+Monday 21 September 2026, 13:00 to 15:00. 20 seats; claudebcn.com showed "last seats" on 18 September, so plan for a full room and for a few walk-ins at the door.
 
 Room 4 is occupied until 13:00 and again from 15:00. Start and finish on time.
 
@@ -43,7 +43,7 @@ The talk in the Auditorium ("Second Brain for Claude") explains the LLM wiki as 
 
 **Say:** "Nothing here was typed this morning. Every line comes from a system that was already running. The rest of the session is how those systems got there."
 
-**Data:** touches real pipeline and calendar data. See the privacy checklist: this block runs on the demo dataset.
+**Data:** this block runs **only** on the prepared synthetic dataset. Do not open the live pipeline or calendar on stage. If the dataset is not ready by Sunday evening, show the recorded version instead; there is no live variant of this station.
 
 ---
 
@@ -62,7 +62,7 @@ The talk in the Auditorium ("Second Brain for Claude") explains the LLM wiki as 
 
 **Say at 1.3:** "This is the part people underestimate. Not that it can write a reply, but that it has read the thread before it does."
 
-**Data:** 1.1 and 1.2 run on the Sotarena example company from the talk repo. 1.3 is the sensitive one. See the privacy checklist.
+**Data:** 1.1 and 1.2 run on the fictional Sotarena company from the talk repo. 1.3 has no live variant at all and runs from a staged recording. See the privacy checklist.
 
 ---
 
@@ -81,7 +81,7 @@ The talk in the Auditorium ("Second Brain for Claude") explains the LLM wiki as 
 
 **Hook order:** open 2.1 with the finished ad image on screen before explaining anything. Work backwards from the output.
 
-**Data:** 2.1 is clean, it contains no customer data. 2.2 and 2.3 touch live CRM and accounting records. See the privacy checklist.
+**Data:** 2.1 is clean, it contains no customer data. 2.2 and 2.3 run **only** on prepared demo records in each system, or from a recording. Never open the live CRM or the live accounting tool on stage.
 
 ---
 

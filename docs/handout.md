@@ -42,9 +42,7 @@ Save it as `CLAUDE.md` in the folder where you work. Claude reads it before it a
 
 The starter repository from the 11:00 talk is a company wiki in plain markdown: a root map, one page per entity, one canonical fact sheet, and a health check that finds contradictions, duplicates and facts that went stale.
 
-```
-github.com/ProduktEntdecker/enterprise-memory-starter
-```
+<https://github.com/ProduktEntdecker/enterprise-memory-starter>
 
 Three steps to try it on your own company:
 
