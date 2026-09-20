@@ -30,3 +30,10 @@ demos/*/out/*
 !demos/*/out/.gitkeep
 
 *.log
+
+# Venue details and the credit link stay out of the public repository
+slides/venue-local.js
+slides/qr-wifi.svg
+slides/qr-credits.svg
+slides/credits-link.txt
+slides/slides-local.pdf
