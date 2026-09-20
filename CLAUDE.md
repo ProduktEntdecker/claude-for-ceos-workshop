@@ -17,8 +17,7 @@ participant on their own machine. While you run one of them:
   no new branch, no commit. People watch files appear in the folder in front of
   them; a detour through branch management is not the subject. A personal or
   global rule asking for a branch does not apply to these demos.
-- **Do not open `docs/` or `demos/fallback/`.** They hold the facilitator guide,
-  the timing and the prepared outputs, which describe what the result is
+- **Do not open `demos/fallback/`.** It holds the prepared outputs, which describe what the result is
   supposed to look like. Reading them before a run makes the run worthless: it
   stops showing what the material produces and starts reproducing what somebody
   wrote down beforehand. Measured on 2026-09-20 in
@@ -32,9 +31,6 @@ participant on their own machine. While you run one of them:
 
 ```text
 README.md                          overview, how to run the demos in Claude Code and claude.ai
-docs/agenda.html                   session agenda with timeline (print to PDF)
-docs/agenda.pdf                    exported agenda
-docs/facilitator-guide.md          run sheet: minutes, prompts, expected results, fallbacks, guardrails
 company/COMPANY.md                 fictional example company, single source of truth for all demo facts
 demos/01-ceos-morning/             demo 1: inbox/ (14 e-mails), calendar/, CLAUDE.md, out/,
                                    .claude/skills/email-triage and daily-briefing,
@@ -82,23 +78,3 @@ One worktree, one branch, one issue. Put `Closes #<NR>` in the pull request body
 - Secrets live in `.env` (ignored by git) or 1Password, never in the repository.
 - `scripts/hooks/pre-commit` scans staged files for secrets. Install it once per clone:
   `cp scripts/hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit`
-
-## Slide typography
-
-The deck is 1280 by 720 px and prints to a 960 by 540 pt page, so **pt = px times 0.75**.
-Same rule as in the enterprise-memory-starter deck, so all three Barcelona sessions look
-like one set.
-
-| Role | Point size | Pixel size in `slides.html` |
-|---|---|---|
-| Target for body text, labels, table cells | 18 pt and up | 24 px and up |
-| Hard floor for anything the audience must read | 14 pt | 19 px |
-| Footnotes only: source lines, tags, slide numbers | 8 to 10.5 pt | 11 to 14 px |
-
-Nothing between 11 and 18 px unless it is a footnote. Check before every export:
-
-```bash
-grep -n "font-size:\s*1[0-8]px" slides/slides.html
-```
-
-Only `.foot` and `.tag` may appear in that output.
