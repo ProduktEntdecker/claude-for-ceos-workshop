@@ -6,7 +6,7 @@ It is Monday 21 September 2026, 07:30. Elena has 30 minutes before the managemen
 
 ## Company facts
 
-@../../company/COMPANY.md
+@COMPANY.md
 
 ## What is in this folder
 

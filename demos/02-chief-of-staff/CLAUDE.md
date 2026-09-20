@@ -6,7 +6,7 @@ Today is Monday 21 September 2026, 07:30 (week 39).
 
 ## Company facts
 
-@../../company/COMPANY.md
+@COMPANY.md
 
 ## Trust levels (binding)
 
