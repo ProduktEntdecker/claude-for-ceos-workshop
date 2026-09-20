@@ -112,9 +112,12 @@ Click inside the window once so it has focus, then paste.
 
 **You would rather not use a terminal at all.**
 There is a desktop app at claude.com/download that runs Claude Code in a normal
-window. It is comfortable, but be aware: the API credits are tied to API billing,
-and the sign-in flow there is built around the subscription. If the credits matter
-to you, use the terminal.
+window, and it is genuinely more comfortable. One thing it cannot do: **claim and
+spend the API credits.** The app signs you in with your Claude account only. It has
+no option for an Anthropic Console account, which is the one the credits are billed
+against. Checked on 20 September 2026 by comparing what the two programs ship.
+
+So: the app for comfortable everyday use, the terminal for Monday.
 
 **You only have a phone or tablet.**
 Claude Code needs a computer. Come anyway and use claude.ai in the browser.
