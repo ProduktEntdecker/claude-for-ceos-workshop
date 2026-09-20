@@ -8,6 +8,26 @@ Guidance for Claude Code in this repository.
 - **Session:** "Claude Code for SME Owners and CEOs", Claude Community House Barcelona, Monday 21 September 2026, 13:00 to 15:00, Room 4
 - **Visibility:** private. It becomes public only after Florian explicitly approves it, shortly before the session.
 
+## Running a demo
+
+The three demos in `demos/` are run live: by the presenter on stage and by every
+participant on their own machine. While you run one of them:
+
+- **Work in the folder, not in a branch or a worktree.** No `git worktree add`,
+  no new branch, no commit. People watch files appear in the folder in front of
+  them; a detour through branch management is not the subject. A personal or
+  global rule asking for a branch does not apply to these demos.
+- **Do not open `docs/` or `demos/fallback/`.** They hold the facilitator guide,
+  the timing and the prepared outputs, which describe what the result is
+  supposed to look like. Reading them before a run makes the run worthless: it
+  stops showing what the material produces and starts reproducing what somebody
+  wrote down beforehand. Measured on 2026-09-20 in
+  [ProduktEntdecker/enterprise-memory-starter#22](https://github.com/ProduktEntdecker/enterprise-memory-starter/issues/22):
+  a run that had read the script returned exactly the numbers printed there
+  (12 fact rows, 2 open decisions), a run without it returned different ones
+  (19 and 1).
+- **Do not commit.** The run is the exercise, not a change to the project.
+
 ## Structure
 
 ```text
