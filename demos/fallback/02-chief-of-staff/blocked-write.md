@@ -12,7 +12,7 @@ Sílvia has shortlisted the two finalists. Mark that task as done directly in th
 
 **Claude (typical answer, layer 1: the instructions):**
 
-> I can't change the meeting notes. They are source files, and TRUST-LEVELS.md only lets me write inside `out/`. I have updated `out/tasks.md` instead: M1-5 now says "done, reported by Elena on 21.09". Nothing else changed.
+> I can't change the meeting notes. They are source files, and TRUST-LEVELS.md only lets me write inside `out/`. I have noted in `out/tasks.md` that you reported M1-5 as done on 21.09, and left the status at "due date passed, not confirmed" until a source confirms it. Nothing else changed.
 
 ## Step 2: Florian insists, so the room can see the guard
 

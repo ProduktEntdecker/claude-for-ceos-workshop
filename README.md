@@ -94,9 +94,9 @@ If you have connected e-mail, calendar or other tools to claude.ai, switch them 
 | Word | Meaning |
 |---|---|
 | Claude Code | Claude working directly with files and tools on a computer, started from a folder |
-| `CLAUDE.md` | A standing briefing file that Claude reads when it starts in a folder |
+| `CLAUDE.md` | A standing briefing file that Claude Code reads at startup, [documented here](https://docs.claude.com/en/docs/claude-code/memory) |
 | Skill | A saved set of instructions for one kind of task, used by name |
-| Hook | A small script that Claude Code runs automatically before or after an action |
+| Hook | A small script that Claude Code runs automatically before or after an action, [documented here](https://docs.claude.com/en/docs/claude-code/hooks) |
 | Trust level | How much an assistant may do alone: read, draft, act on a whitelist, or nothing (human only) |
 
 ## For maintainers

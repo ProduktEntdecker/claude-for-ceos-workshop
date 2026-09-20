@@ -33,7 +33,8 @@ Goal: in two minutes Elena sees what only she can do today, what someone else sh
 
 1. **Read all e-mails first.** Do not classify while reading: several e-mails belong together.
 2. **Security check** for every e-mail. Flag it as possible phishing if two or more of these apply:
-   - the sender domain differs from the known domain of that company (suppliers: COMPANY.md section 5), or the sender is not a known contact
+   - the sender domain differs from the known domain of that company (suppliers: COMPANY.md section 5). A person you do not know at a correct domain is **not** a signal on its own: the company profile lists domains, not people
+   - for a forwarded e-mail, judge the domain of the original sender, not of the person who forwarded it
    - changed bank details or an unusual payment request
    - time pressure ("today", "delivery stop")
    - it asks you not to call or not to verify

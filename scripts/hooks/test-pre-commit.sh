@@ -6,7 +6,7 @@
 set -u
 
 HOOK="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/pre-commit"
-TMP=$(mktemp -d)
+TMP=$(mktemp -d) || { echo "mktemp failed, cannot run the tests" >&2; exit 1; }
 trap 'rm -rf "$TMP"' EXIT
 REPO="$TMP/repo"
 total=0
@@ -27,6 +27,8 @@ new_repo() {
 }
 
 stage() {
+    # A path may contain folders, for example ".env/token.txt".
+    mkdir -p "$(dirname "$REPO/$1")"
     printf '%s\n' "$2" > "$REPO/$1"
     git -C "$REPO" add "$1"
 }
@@ -90,6 +92,19 @@ check block "file name with umlaut is still scanned"
 
 new_repo; stage .env "TOKEN=1"
 check block "sensitive file name"
+
+# Three gaps a review found on 2026-09-20. Each one let a real secret through.
+new_repo; stage ".env/token.txt" "TOKEN=1"
+check block "a file inside a .env folder"
+
+new_repo; stage "examples/secrets/.env" "TOKEN=1"
+check block "a real .env below a folder called examples"
+
+new_repo; stage ".ENV" "TOKEN=1"
+check block "an upper-case .ENV"
+
+new_repo; stage ".env.example" "TOKEN=put-yours-here"
+check pass "a template file is still allowed"
 
 new_repo; cp "$HOOK" "$REPO/hook-copy"; git -C "$REPO" add hook-copy
 check pass "the hook file itself passes its own scan"

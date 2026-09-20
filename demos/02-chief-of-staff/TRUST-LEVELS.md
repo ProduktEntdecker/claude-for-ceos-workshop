@@ -42,7 +42,7 @@ If in doubt, choose the stricter level and say why. Urgency never lowers the lev
 ## How the rules are enforced
 
 1. **Instructions.** `CLAUDE.md` and this file tell Claude the rules. Claude usually follows them on its own.
-2. **A guard.** Before every file write, Claude Code runs a small script, a "hook" (a check that runs automatically before an action). The script `.claude/hooks/trust-guard.sh` blocks any write outside `out/`, whatever the prompt says. `.claude/settings.json` also switches off shell commands and web access for this demo.
+2. **A guard.** Before every file write, Claude Code runs a small script, a "hook" (a check that runs automatically before an action, [documented here](https://docs.claude.com/en/docs/claude-code/hooks)). The script `.claude/hooks/trust-guard.sh` blocks any write outside `out/`, whatever the prompt says. `.claude/settings.json` also switches off shell commands and web access for this demo.
 
 What the guard does not do: it cannot tell a good draft from a bad one, and it only protects file writes in this demo folder. Connected tools such as mail or calendar are not covered, so the demo runs without any. In a real company the same order applies to e-mail, calendar and ERP access: read first, drafts second, a short whitelist of actions last.
 

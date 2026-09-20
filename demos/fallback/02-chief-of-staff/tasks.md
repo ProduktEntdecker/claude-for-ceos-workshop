@@ -14,7 +14,7 @@ Source: notes of 14.09 (M1), 15.09 (M3) and 17.09.2026 (M2). Status as of Monday
 | M1-4 | Start an 8D report (structured problem-solving report) on the Kornhagen spots; first report | Irene Casado | Fri 25.09.2026 | action | L2 | internal quality process | due this week |
 | M2-7 | Get a price for reserved weekly capacity at Colorvall (estimate EUR 90,000 a year) | Raúl Méndez | Fri 25.09.2026 | action | L1 | request to a supplier | due this week |
 | M3-3 | Prepare a walk-away price for the Hovelmeer 2027 volume talks | Marc Duran | Fri 25.09.2026 | action | L1 | position for a negotiation | due this week |
-| M3-5 | Check feasibility and minimum volume of the exclusive colour "Lavande" for Maisons Pradevel | Marc Duran, with Oriol Pagès | Fri 25.09.2026 | action | L1 | answer to a customer | due this week |
+| M3-5 | Check feasibility and minimum volume of the exclusive colour "Lavande" for Maisons Pradevel | Marc Duran, with Oriol Pagès | Fri 25.09.2026 | action | L2 | internal check with a colleague, nothing leaves the company | due this week |
 | M1-1 | Draft the customer letter for the 2027 price list (+4.5% from 01.01.2027) | Marc Duran | Wed 30.09.2026 | decision | L1 | letter to customers | open |
 | M2-4 | Compile the Colorvall claims history 2024 to 2026 and run a pretreatment audit | Irene Casado | Wed 30.09.2026 | action | L2 | internal analysis by the owner | open |
 | M2-2 | Build the payback and cash-flow model for an in-house coating line | Pau Gimeno | Thu 01.10.2026 | action | L1 | analysis for the board | open |

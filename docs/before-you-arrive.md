@@ -48,10 +48,18 @@ claude
 ```
 
 Your browser opens and asks you to sign in. Sign in, come back to the terminal,
-and you are connected. If you have no Claude account yet, create one at claude.ai
-first. A free account is enough.
+and you are connected.
 
 Type `/exit` to leave.
+
+**Which account you need, and this matters:** Claude Code needs a paid Claude plan
+(Pro, Max, Team or Enterprise) or an Anthropic Console account. A free claude.ai
+account does **not** open Claude Code. Source: the official quickstart, under
+"Before you begin", https://docs.claude.com/en/docs/claude-code/quickstart
+
+A free account is enough for the browser exercises in blocks 1 and 3. Only the
+terminal needs the paid plan. If you do not have one, take that route and nothing
+is lost.
 
 **Do not put `sudo` in front of the install line.** The installer refuses it on
 purpose, because it would install into the wrong home folder.
@@ -112,10 +120,20 @@ Click inside the window once so it has focus, then paste.
 
 **You would rather not use a terminal at all.**
 There is a desktop app at claude.com/download that runs Claude Code in a normal
-window, and it is genuinely more comfortable. One thing it cannot do: **claim and
-spend the API credits.** The app signs you in with your Claude account only. It has
-no option for an Anthropic Console account, which is the one the credits are billed
-against. Checked on 20 September 2026 by comparing what the two programs ship.
+window, and it is genuinely more comfortable. One thing it could not do when this
+was written: **claim and spend the API credits.**
+
+The credits are billed against an Anthropic Console account. The terminal has a
+documented switch for that, `claude auth login --console`, described as "Use
+Anthropic Console (API usage billing) instead of Claude subscription" in
+`claude auth login --help`. The account types Claude Code accepts are listed in
+the official setup guide, https://docs.claude.com/en/docs/claude-code/setup
+
+How this was checked, so you can repeat it: the three strings of that login choice
+("Claude account with subscription", "Anthropic Console account", "API usage
+billing") appear 15, 10 and 6 times in the shipped CLI **2.1.278** and not once in
+the desktop app bundle **2.110.0**. Both versions were current on 20 September
+2026. A later version may change this, so check again before you rely on it.
 
 So: the app for comfortable everyday use, the terminal for Monday.
 

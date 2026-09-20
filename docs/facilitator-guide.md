@@ -32,7 +32,10 @@ All demo data belongs to the fictional company Sotarena S.L. ([`company/COMPANY.
 - [ ] Run every prompt below once, with a stopwatch. Compare the results with `demos/fallback/`. If a bucket or trust level differs, sharpen the skill, not the fallback.
 - [ ] Take screenshots of the good run as a second fallback.
 - [ ] Run the advisory board prompt with the Sotarena example in claude.ai. Keep that chat: it is the demo for 14:05.
-- [ ] Test the participant flow on a second claude.ai account: open `demos/01-ceos-morning/claude-ai-pack.md` on GitHub, "Copy raw file", paste, prompt.
+- [ ] Test the participant flow on a **dedicated demo account** at claude.ai, not on a second personal one: open `demos/01-ceos-morning/claude-ai-pack.md` on GitHub, "Copy raw file", paste, prompt.
+  - The account must be empty before the rehearsal. A personal second account carries chat history, projects and custom instructions, and any of those can appear on the shared screen.
+  - Afterwards it holds only the Sotarena chats. Check the sidebar before you share the screen.
+  - Turn off every connector on that account. Nothing in these demos needs access to real mail, calendar or files.
 - [ ] Repository public (after your approval), QR code and links filled in `docs/agenda.html` and the PDF.
 
 ### On the day, from 12:30

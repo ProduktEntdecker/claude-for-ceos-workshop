@@ -94,13 +94,13 @@ SENSITIVE_FILES=(
     # .env itself and every suffixed variant (.env.local, .env.production).
     # The template check further down keeps .env.example and friends allowed.
     # Plain regexes, no category: this one carries a "|" of its own.
-    '\.env($|\.)'
+    '\.env($|[./])'
     # direnv, blocked on purpose even though an .envrc without values (just
     # `dotenv .env` or `op run`) is committed legitimately. The hook is the
     # last line of defence and a false alarm is cheaper than a leaked secret.
     # .envrc.example stays allowed via the template check, and the skill's
     # gitignore-template ignores .envrc so it is not staged in the first place.
-    '\.envrc($|\.)'
+    '\.envrc($|[./])'
     '\.pem$'
     '\.key$'
     'credentials'
@@ -198,12 +198,16 @@ done
 
 echo -e "${YELLOW}[2/2] Checking file names...${NC}"
 for file in "${STAGED_FILES[@]}"; do
-    # Allow .env.example and similar template files
-    case "$file" in
+    # Allow .env.example and similar template files. Only the file name counts:
+    # a folder called examples/ must not exempt a real .env inside it.
+    basename="${file##*/}"
+    case "$basename" in
         *.example*|*.template*|*.sample*) continue ;;
     esac
     for pattern in "${SENSITIVE_FILES[@]}"; do
-        if matches "$file" -E "$pattern"; then
+        # -i: .ENV and .Env are the same risk as .env, and case-insensitive
+        # file systems hand us either spelling.
+        if matches "$file" -Ei "$pattern"; then
             echo -e "${RED}BLOCKED: sensitive file name: $file${NC}"
             FAILED=1
         fi

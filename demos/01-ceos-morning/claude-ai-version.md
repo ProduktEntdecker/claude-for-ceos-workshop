@@ -84,6 +84,11 @@ Compare with the prepared result in [`../fallback/01-ceos-morning/`](../fallback
 
 ## Claude Code and claude.ai side by side
 
+Sources for the product behaviour in this table: [CLAUDE.md and memory](https://docs.claude.com/en/docs/claude-code/memory),
+[skills](https://docs.claude.com/en/docs/claude-code/skills) and
+[hooks](https://docs.claude.com/en/docs/claude-code/hooks). Checked 20 September 2026,
+Claude Code 2.1.278. Both products change, so verify before you rely on a row.
+
 | In Claude Code (the live demo) | In claude.ai |
 |---|---|
 | `CLAUDE.md`: a standing briefing Claude reads in this folder | Paste the context each time, or use project instructions if your plan has Projects |
