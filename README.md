@@ -51,8 +51,12 @@ You need Claude Code installed and logged in, and a copy of this repository (clo
 
 Start Claude Code **inside** the demo folder. That is where its briefing, skills and (in demo 2) the guard live.
 
+`--strict-mcp-config` keeps any MCP servers you have configured elsewhere out of
+this session. The demos do not need them, and a server that fails to load prints
+a warning as the first thing on screen.
+
 ```bash
-cd demos/01-ceos-morning && claude
+cd demos/01-ceos-morning && claude --strict-mcp-config
 ```
 
 Then type, for example:
@@ -63,7 +67,7 @@ Now use the daily-briefing skill and write my briefing for today.
 ```
 
 ```bash
-cd demos/02-chief-of-staff && claude
+cd demos/02-chief-of-staff && claude --strict-mcp-config
 ```
 
 ```text
