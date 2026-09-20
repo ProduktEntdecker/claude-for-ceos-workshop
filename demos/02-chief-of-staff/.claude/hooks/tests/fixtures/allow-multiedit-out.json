@@ -1,0 +1,10 @@
+{
+  "session_id": "fixture",
+  "hook_event_name": "PreToolUse",
+  "cwd": "__ROOT__",
+  "tool_name": "MultiEdit",
+  "tool_input": {
+    "file_path": "__ROOT__/out/tasks.md",
+    "edits": [ { "old_string": "open", "new_string": "due this week" } ]
+  }
+}

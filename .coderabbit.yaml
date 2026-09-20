@@ -1,0 +1,54 @@
+# CodeRabbit configuration, based on the ProduktEntdecker standard
+# Docs: https://docs.coderabbit.ai/reference/configuration
+
+language: "de"
+tone_instructions: "Sei direkt und pragmatisch. Fokus auf Fehler, Sicherheit, Datenschutz und falsche Fakten, nicht auf Style-Nitpicks."
+early_access: true
+
+reviews:
+  profile: "assertive"
+  request_changes_workflow: true
+  high_level_summary: true
+  collapse_walkthrough: true
+  poem: false
+  in_progress_fortune: false
+  sequence_diagrams: false
+  changed_files_summary: true
+  assess_linked_issues: true
+  related_issues: true
+  related_prs: false
+
+  auto_review:
+    enabled: true
+    drafts: false
+    auto_incremental_review: true
+
+  path_filters:
+    - "!**/*.pdf"
+    - "!**/node_modules/**"
+    - "!**/.claude/worktrees/**"
+
+  path_instructions:
+    - path: "**/*.{md,html,json}"
+      instructions: "Participant-facing content is English. Flag em-dash characters (U+2014), real client or participant names, secrets, and factual claims about Anthropic products, exams or programmes that lack a source."
+
+  tools:
+    markdownlint:
+      enabled: true
+    gitleaks:
+      enabled: true
+    shellcheck:
+      enabled: true
+    eslint:
+      enabled: true
+
+chat:
+  auto_reply: true
+
+knowledge_base:
+  learnings:
+    scope: "auto"
+  issues:
+    scope: "auto"
+  pull_requests:
+    scope: "auto"
