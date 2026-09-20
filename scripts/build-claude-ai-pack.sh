@@ -47,3 +47,18 @@ build_pack "$REPO/demos/02-chief-of-staff/claude-ai-pack.md" \
   "$REPO/company/COMPANY.md" \
   "$REPO/demos/02-chief-of-staff/TRUST-LEVELS.md" \
   "$REPO"/demos/02-chief-of-staff/notes/M*.md
+
+# Each demo folder carries its own copy of COMPANY.md, because Claude Code is
+# started inside the demo folder and an import that reaches outside it
+# (@../../company/COMPANY.md) triggers the external-import dialog. That dialog
+# defaults to "No", which would run the demo without any company facts.
+# company/COMPANY.md stays the single source of truth; these are copies.
+sync_company() {
+  local target
+  for target in "$REPO"/demos/01-ceos-morning "$REPO"/demos/02-chief-of-staff; do
+    cp "$REPO/company/COMPANY.md" "$target/COMPANY.md"
+    printf 'Synced %s\n' "${target#"$REPO"/}/COMPANY.md"
+  done
+}
+
+sync_company

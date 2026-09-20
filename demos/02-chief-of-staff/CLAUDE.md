@@ -6,7 +6,7 @@ Today is Monday 21 September 2026, 07:30 (week 39).
 
 ## Company facts
 
-@../../company/COMPANY.md
+@COMPANY.md
 
 ## Trust levels (binding)
 
@@ -27,6 +27,9 @@ Today is Monday 21 September 2026, 07:30 (week 39).
 ## How to work
 
 - Plain English, short sentences. Explain a technical term in a few words the first time you use it.
+- **Answer in English, in the chat as well as in the files.** A personal or
+  global rule that asks for another language does not apply to these demos.
+  The room is international and the audience reads along on the screen.
 - Take facts only from the notes and COMPANY.md. If the notes do not say that a task is done, write "not confirmed", never "done".
 - Refer to tasks by meeting and item number, for example M1-3 (management team weekly, third item).
 - End every piece of work with a short report: what you did (L2), what you drafted (L1), what stays with humans (L3).

@@ -8,10 +8,6 @@ The idea: Claude as a thinking partner for leaders, not only an assistant.
 
 ## Contents
 
-- [`docs/agenda.html`](docs/agenda.html): agenda with timeline. Open it in a browser and print to PDF, or use [`docs/agenda.pdf`](docs/agenda.pdf).
-- [`slides/`](slides/): workshop deck (HTML and PDF) with speaker notes.
-- [`handout/`](handout/): one-page handout with the three prompts, guardrails and next steps (HTML and PDF).
-- [`docs/facilitator-guide.md`](docs/facilitator-guide.md): run sheet with exact prompts, fallbacks and the guardrails for company data.
 - [`company/COMPANY.md`](company/COMPANY.md): the fictional example company used in all demos.
 - [`demos/01-ceos-morning/`](demos/01-ceos-morning/): daily briefing and e-mail triage.
 - [`demos/02-chief-of-staff/`](demos/02-chief-of-staff/): chief of staff with trust levels.
@@ -51,8 +47,12 @@ You need Claude Code installed and logged in, and a copy of this repository (clo
 
 Start Claude Code **inside** the demo folder. That is where its briefing, skills and (in demo 2) the guard live.
 
+`--strict-mcp-config` keeps any MCP servers you have configured elsewhere out of
+this session. The demos do not need them, and a server that fails to load prints
+a warning as the first thing on screen.
+
 ```bash
-cd demos/01-ceos-morning && claude
+cd demos/01-ceos-morning && claude --strict-mcp-config
 ```
 
 Then type, for example:
@@ -63,7 +63,7 @@ Now use the daily-briefing skill and write my briefing for today.
 ```
 
 ```bash
-cd demos/02-chief-of-staff && claude
+cd demos/02-chief-of-staff && claude --strict-mcp-config
 ```
 
 ```text
@@ -71,7 +71,7 @@ Use the chief-of-staff skill: turn last week's three meeting notes into one task
 Write the weekly status for the leadership team.
 ```
 
-Results are written to `out/` in the demo folder. Compare them with [`demos/fallback/`](demos/fallback/). All prompts of the live session are in the [facilitator guide](docs/facilitator-guide.md).
+Results are written to `out/` in the demo folder. Compare them with [`demos/fallback/`](demos/fallback/).
 
 To test the guard of demo 2 (needs `jq`):
 
