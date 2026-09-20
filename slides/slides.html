@@ -171,6 +171,19 @@ h2.xl { font-size: 46px; line-height: 1.16; max-width: 1060px; }
 .qr.light { width: 300px; height: 300px; border: 1px solid var(--line); }
 .qr-caption { margin-top: 12px; font-size: 20px; color: var(--muted); text-align: center; }
 
+/* Steps from the participant's point of view */
+.steps-you { counter-reset: schritt; margin-top: 30px; }
+.steps-you li { counter-increment: schritt; list-style: none; position: relative;
+                padding-left: 58px; margin-bottom: 20px; font-size: 24px; line-height: 1.36; }
+.steps-you li::before { content: counter(schritt); position: absolute; left: 0; top: -2px;
+                        width: 38px; height: 38px; border-radius: 50%; background: var(--clay);
+                        color: #fff; font-family: var(--sans); font-size: 21px; font-weight: 600;
+                        display: flex; align-items: center; justify-content: center; }
+.steps-you .path { font-family: var(--mono); font-size: 21px; color: #8a4a2c; }
+.steps-you .hint { display: block; font-size: 20px; color: var(--muted); margin-top: 3px; }
+.warnbox { margin-top: 8px; border-left: 3px solid var(--clay); padding: 10px 0 10px 20px;
+           font-size: 21px; line-height: 1.38; max-width: 1010px; }
+
 /* Before we start */
 .install-lines { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
 .install-lines .os { display: block; font-size: 19px; color: var(--muted); margin-bottom: 5px; }
@@ -787,7 +800,7 @@ h2.xl { font-size: 46px; line-height: 1.16; max-width: 1060px; }
     </div>
   </div>
   <p class="start-note"><b>If it does not work, catch me before we start</b>, not during block 1. Blocks 1 and 3 also run in your browser, so nobody sits idle.</p>
-  <div class="foot"><span class="src">An independent community resource, built for the Claude Community House Barcelona.</span><span class="num">1 / 13</span></div>
+  <div class="foot"><span class="src">An independent community resource, built for the Claude Community House Barcelona.</span><span class="num">1 / 14</span></div>
 </section>
 
 
@@ -814,7 +827,7 @@ h2.xl { font-size: 46px; line-height: 1.16; max-width: 1060px; }
     <text x="60" y="55" text-anchor="middle" font-family="Georgia, serif" font-size="15" fill="#cfcabf">read</text>
     <text x="60" y="248" text-anchor="middle" font-family="Georgia, serif" font-size="15" fill="#cfcabf">act</text>
   </svg>
-  <div class="foot"><span class="src">An independent community resource, built for the Claude Community House Barcelona.</span><span class="num">2 / 13</span></div>
+  <div class="foot"><span class="src">An independent community resource, built for the Claude Community House Barcelona.</span><span class="num">2 / 14</span></div>
 </section>
 
 <!-- 3 -->
@@ -1389,7 +1402,7 @@ h2.xl { font-size: 46px; line-height: 1.16; max-width: 1060px; }
       <p class="qr-caption">Scan now, follow along</p>
     </div>
   </div>
-  <div class="foot"><span class="src">An independent community resource, built for the Claude Community House Barcelona.</span><span class="num">3 / 13</span></div>
+  <div class="foot"><span class="src">An independent community resource, built for the Claude Community House Barcelona.</span><span class="num">3 / 14</span></div>
 </section>
 
 
@@ -1410,7 +1423,7 @@ h2.xl { font-size: 46px; line-height: 1.16; max-width: 1060px; }
     </div>
     <div class="credits-qr"><img src="qr-credits.svg" onerror="this.onerror=null;this.src='qr-credits-placeholder.svg';this.alt='Placeholder: generate qr-credits.svg locally before the session'" alt="QR code for the Claude API credit offer"></div>
   </div>
-  <div class="foot"><span class="src">This slide stays up while the next two run. <b>Source:</b> Claude Community Team, 18 September 2026. The offer link is generated locally and is deliberately not in this repository.</span><span class="num">4 / 13</span></div>
+  <div class="foot"><span class="src">This slide stays up while the next two run. <b>Source:</b> Claude Community Team, 18 September 2026. The offer link is generated locally and is deliberately not in this repository.</span><span class="num">4 / 14</span></div>
 </section>
 
 
@@ -1438,7 +1451,7 @@ h2.xl { font-size: 46px; line-height: 1.16; max-width: 1060px; }
       <p>The decisions only you can make. Not calendar upkeep.</p>
     </div>
   </div>
-  <div class="foot"><span class="src">Sotarena S.L. is a fictional example company used throughout today.</span><span class="num">5 / 13</span></div>
+  <div class="foot"><span class="src">Sotarena S.L. is a fictional example company used throughout today.</span><span class="num">5 / 14</span></div>
 </section>
 
 <!-- 6 -->
@@ -1466,7 +1479,7 @@ h2.xl { font-size: 46px; line-height: 1.16; max-width: 1060px; }
       <p class="tagline">Disagreement, on purpose.</p>
     </div>
   </div>
-  <div class="foot"><span class="src">Formats 1 and 2 run in Claude Code, format 3 in your browser at claude.ai. Nothing running on your machine? Every exercise also works in the browser.</span><span class="num">6 / 13</span></div>
+  <div class="foot"><span class="src">Formats 1 and 2 run in Claude Code, format 3 in your browser at claude.ai. Nothing running on your machine? Every exercise also works in the browser.</span><span class="num">6 / 14</span></div>
 </section>
 
 <!-- 7 -->
@@ -1482,7 +1495,7 @@ h2.xl { font-size: 46px; line-height: 1.16; max-width: 1060px; }
     <div class="row"><div class="k">Close</div><div class="v">What to try on Monday, and how to keep it safe</div></div>
   </div>
                           </div>
-  <div class="foot"><span class="src">Nobody is left out: if Claude Code is not running on your machine, every exercise also works in the browser at claude.ai.</span><span class="num">7 / 13</span></div>
+  <div class="foot"><span class="src">Nobody is left out: if Claude Code is not running on your machine, every exercise also works in the browser at claude.ai.</span><span class="num">7 / 14</span></div>
 </section>
 
 <!-- 8 -->
@@ -1525,10 +1538,30 @@ h2.xl { font-size: 46px; line-height: 1.16; max-width: 1060px; }
     <line x1="276" y1="278" x2="1088" y2="278" stroke="var(--line)" stroke-width="1"/>
   </svg>
   <p class="note" style="margin-top:18px"><b>Now live, in the browser:</b> the same inbox, the same question, and one place where I push back on what it decided.</p>
-  <div class="foot"><span class="src">Demo data: <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">8 / 13</span></div>
+  <div class="foot"><span class="src">Demo data: <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">8 / 14</span></div>
 </section>
 
 <!-- 9 -->
+<section class="slide" data-minute="13:20">
+  <p class="eyebrow">Block 1 of 3 &middot; Your turn</p>
+  <h2>The same inbox, in your browser</h2>
+  <ol class="steps-you">
+    <li>Open <span class="path">claude.ai</span> and start a new chat
+      <span class="hint">Ten minutes. No installation, and nothing of yours is involved.</span></li>
+    <li>Attach the data pack <span class="path">demos/01-ceos-morning/claude-ai-pack.md</span>
+      <span class="hint">Paperclip icon, or open it on GitHub, copy the raw file, paste it in. The company, the calendar and all 14 e-mails are in that one file.</span></li>
+    <li>Paste the triage prompt underneath, in the same message, then send
+      <span class="hint">The prompt is in <span class="path">claude-ai-version.md</span>, next to the pack.</span></li>
+    <li>Compare: where did your Claude sort differently from mine?
+      <span class="hint">That difference is the interesting part, not the agreement.</span></li>
+  </ol>
+  <p class="warnbox"><b>Connected your own mail or calendar to claude.ai?</b> Switch those off for this exercise. Everything Claude needs is in the pack, and nothing here should touch your real data.</p>
+  <div class="foot"><span class="src"><b>Demo data:</b> <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">9 / 14</span></div>
+</section>
+
+
+
+<!-- 10 -->
 <section class="slide" data-minute="13:37">
   <p class="eyebrow">Block 2 of 3</p>
   <h2>Chief of staff, with trust levels</h2>
@@ -1542,10 +1575,10 @@ h2.xl { font-size: 46px; line-height: 1.16; max-width: 1060px; }
       <p>On paper or in claude.ai: what may an assistant always read, what may it draft, and what short list of actions may it take alone?</p>
     </div>
   </div>
-  <div class="foot"><span class="src">Demo data: <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">9 / 13</span></div>
+  <div class="foot"><span class="src">Demo data: <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">10 / 14</span></div>
 </section>
 
-<!-- 10 -->
+<!-- 11 -->
 <section class="slide" data-minute="13:41">
   <p class="eyebrow">Block 2 &middot; The rule underneath</p>
   <h2>Read. Draft. Act on a whitelist. Human only.</h2>
@@ -1556,10 +1589,10 @@ h2.xl { font-size: 46px; line-height: 1.16; max-width: 1060px; }
     <div class="band b4"><span class="bn">Human only</span><span class="bd">Money, people, customer commitments, the board.</span></div>
   </div>
   <p class="note"><b>In claude.ai, these are instructions only.</b> In Claude Code, a script enforces the last two, whatever the prompt says.</p>
-  <div class="foot"><span class="src">Give an AI chief of staff trust the way you would give it to a new employee.</span><span class="num">10 / 13</span></div>
+  <div class="foot"><span class="src">Give an AI chief of staff trust the way you would give it to a new employee.</span><span class="num">11 / 14</span></div>
 </section>
 
-<!-- 11 -->
+<!-- 12 -->
 <section class="slide" data-minute="14:07">
   <p class="eyebrow">Block 3 of 3 &middot; Hands-on</p>
   <h2>Your advisory board</h2>
@@ -1571,10 +1604,10 @@ h2.xl { font-size: 46px; line-height: 1.16; max-width: 1060px; }
     <li><b>4</b><span>Answer the advisors' questions. Go through the rounds. Push back when an argument is weak.</span></li>
     <li><b>5</b><span>Write "memo" for a decision memo to keep, and look at again in three months.</span></li>
   </ol>
-  <div class="foot"><span class="src">Full prompt and data rules on the repo: demos/03-advisory-board/prompt.md</span><span class="num">11 / 13</span></div>
+  <div class="foot"><span class="src">Full prompt and data rules on the repo: demos/03-advisory-board/prompt.md</span><span class="num">12 / 14</span></div>
 </section>
 
-<!-- 12 -->
+<!-- 13 -->
 <section class="slide" data-minute="14:40">
   <p class="eyebrow">Before you go</p>
   <h2>What to try on Monday</h2>
@@ -1596,10 +1629,10 @@ h2.xl { font-size: 46px; line-height: 1.16; max-width: 1060px; }
       </ul>
     </div>
   </div>
-  <div class="foot"><span class="src">Full guardrail list, and words explained, in the facilitator guide on the repo.</span><span class="num">12 / 13</span></div>
+  <div class="foot"><span class="src">Full guardrail list, and words explained, in the facilitator guide on the repo.</span><span class="num">13 / 14</span></div>
 </section>
 
-<!-- 13 -->
+<!-- 14 -->
 <section class="slide dark closing" data-minute="14:57">
   <p class="eyebrow">Take it home</p>
   <div class="closing-grid">
@@ -2165,7 +2198,7 @@ h2.xl { font-size: 46px; line-height: 1.16; max-width: 1060px; }
 	</g>
 </svg></div>
   </div>
-  <div class="foot"><span class="src">Feedback and wrap-up: 14:55 to 15:00.</span><span class="num">13 / 13</span></div>
+  <div class="foot"><span class="src">Feedback and wrap-up: 14:55 to 15:00.</span><span class="num">14 / 14</span></div>
 </section>
 
 </div>
