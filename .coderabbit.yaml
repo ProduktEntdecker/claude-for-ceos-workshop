@@ -1,8 +1,8 @@
 # CodeRabbit configuration, based on the ProduktEntdecker standard
 # Docs: https://docs.coderabbit.ai/reference/configuration
 
-language: "de"
-tone_instructions: "Sei direkt und pragmatisch. Fokus auf Fehler, Sicherheit, Datenschutz und falsche Fakten, nicht auf Style-Nitpicks."
+language: "en-US"
+tone_instructions: "Be direct and pragmatic. Focus on bugs, security, privacy and incorrect facts, not on style nitpicks."
 early_access: true
 
 reviews:
